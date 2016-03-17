@@ -1,0 +1,1 @@
+# BitsOnCoffee Core LibraryCore Library##Changelog###1.0.0.0* Initial commit
