@@ -20,7 +20,7 @@ namespace BitsOnCoffee.Core.Extensions
 					yield return value;
 				}
 			}
-		} 
+		}
 		#endregion
 	}
 }

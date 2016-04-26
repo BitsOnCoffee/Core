@@ -1,1 +1,1 @@
-# BitsOnCoffee Core LibraryCore Library##Changelog###1.0.0.0* Initial commit
+# BitsOnCoffee Core LibraryCore Library##Changelog###1.0.0.1* _CamelCaseNormalize_ string extension method###1.0.0.0* Initial commit

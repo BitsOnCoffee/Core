@@ -8,12 +8,30 @@ namespace BitsOnCoffee.Core.Extensions
 {
 	public static class StringExtensions
 	{
+		private static readonly string[] _prepositions = new[] { "aboard","about","above","across","after","against","along","amid","among","anti","around","as","at",
+			"before","behind","below","beneath","beside","besides","between","beyond","but","by",
+			"concerning","considering",
+			"despite","down","during",
+			"except","excepting","excluding",
+			"following","for","from",
+			"in","inside","into","like",
+			"minus",
+			"near",
+			"of","off","on","onto","opposite","outside","over",
+			"past","per","plus",
+			"regarding","round",
+			"save","since",
+			"than","through","to","toward","towards",
+			"under","underneath","unlike","until","up","upon",
+			"versus","vs.","via",
+			"with","within","without" };
+
 		#region IsEmail
-		/// <summary>
-		/// Checks if the string is a valid emamil address. <a href="http://msdn.microsoft.com/en-us/library/01escwtf(v=vs.110).aspx">MSDN: Verify that Strings Are in Valid Email Format</a>
-		/// </summary>
-		/// <param name="text">String to be checked</param>
-		/// <returns>Result</returns>
+			/// <summary>
+			/// Checks if the string is a valid emamil address. <a href="http://msdn.microsoft.com/en-us/library/01escwtf(v=vs.110).aspx">MSDN: Verify that Strings Are in Valid Email Format</a>
+			/// </summary>
+			/// <param name="text">String to be checked</param>
+			/// <returns>Result</returns>
 		public static bool IsEmail(this string text)
 		{
 			return Regex.IsMatch(text,
@@ -111,7 +129,30 @@ namespace BitsOnCoffee.Core.Extensions
 		public static string RemoveHtmlTags(this string text)
 		{
 			return Regex.Replace(text, "<.*?>", String.Empty);
-		} 
+		}
+		#endregion
+
+		#region CamelCaseNormalize
+		/// <summary>
+		/// Normalizes camel case string to human readable format. F.e.: 'SelectTheFirst' => 'Select the First'.
+		/// </summary>
+		/// <returns>Normalized value</returns>
+		public static string CamelCaseNormalize(this string input)
+		{
+			string normalized = Regex.Replace(input, "[A-Z]", " $0");
+			normalized = normalized.Trim();
+			string[] splitted = normalized.Split(' ');
+
+			for (int i = 0; i < splitted.Count(); i++)
+			{
+				if (_prepositions.Contains(splitted[i], StringComparer.InvariantCultureIgnoreCase))
+				{
+					splitted[i] = splitted[i].ToLower();
+				}
+			}
+
+			return string.Join(" ", splitted);
+		}
 		#endregion
 	}
 }
